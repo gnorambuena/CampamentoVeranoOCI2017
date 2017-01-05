@@ -1,0 +1,108 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<title>Backtracking</title>
+</head> 
+<body style = "margin-left: 50px; margin-right: 50px">
+	<div  style = "padding: 30px; align-content: center;">
+		<h3>Backtracking</h3>
+		<p style="text-align: justify">BT es una estrategia para hacer búsqueda exhaustiva en espacios de búsqueda de tamaño pequeño (que permita recorrerlo completo en tiempo de competencia). Es una forma de hacer "fuerza bruta" ordeanada para probar todas las posibles opciones y tomar una decisión cada vez que se encuentra una opción de las que estoy buscando. Si el problema pide "determinar si algo existe", se busca en todo el espacio y se responde a penas se encuentre (o se dice que no existe si es que no lo encuentras después de revisar todo). Otro caso es que el problema pida "contar todas las veces" que algo pasa. En este caso pasamos por todo el espacio de búsqueda y cada ves que encuentro un "elemento del espacio" donde pasa lo que estoy buscando aumento un contador. Lamentablemente no tenemos video para esto, pero aquí dejaremos una explicación y punteros para aprender.</p>
+		<h3><p>========================</p>
+			<p>Backtracking</p>
+			<p>========================</p>
+		</h3>
+		<p>Ideas cruciales:</p>
+		<p>1) Representar bien el espacio de búsqueda</p>
+		<p>2) Recorrer el espacio de manera ordenada</p>
+
+		<h3><p>Explicación</p>
+			<p>========================</p>
+		</h3>
+		<p>1) Representar bien el espacio de búsqueda</p>
+		<ul>
+			<li style="text-align: justify">
+			El espacio de búsqueda siempre se puede pensar que son objetos del tipo "todas las permutaciones de ciertos números", "todas las posibles formas de jugar una partida de ajedrez", "todos los posibles caminos en un laberinto (que no pasan dos veces por el mismo lugar)", etc. y dependerá del problema en particular. </li>
+
+			<li style="text-align: justify">
+			En general los objetos se pueden ir creando de a poco desde objetos más pequeños. Por ejemplo, para crear una posible permutación, se puede empezar de una lista vacía e ir agregando elementos distintos uno a uno hasta construir la permutación completa. Lo mismo para la partida de ajedrez (voy moviendo las piezas una a una según las reglas del ajedrez) o los caminos en un laberinto (comienzo en la entrada del laberinto y voy avanzando paso a paso).
+			</li>
+
+			<li style="text-align: justify">
+			La construcción de todos los posibles objetos del espacio de búsqueda se puede estructurar (implícitamente) en un árbol en donde cada nodo es un "objeto parcial". A este árbol se le llama el "arbol de backtracing". 
+			</li>
+
+			<li style="text-align: justify">
+			La raiz del árbol es el objeto más pequeño o inicial, p.ej. la lista vacía en el caso de las permutaciones, o el tablero inicial en el caso del ajedrez. Dado un nodo del árbol, sus hijos representarán todas las posibles formas de crear un objeto parcial siguiente a partir del objeto parcial actual. Por ejemplo, en el caso del tablero de ajedrez los hijos de un nodo (tablero) serían todos los posibles tableros que se obtienen moviendo una pieza desde la posición del tablero actual. Como un ejemplo más concreto, supongamos que el espacio de búsqueda son las permutaciones de 8 letras {a,b,c,d,e,f,g,h}.
+			<p> Un nodo del arbol es "hcfa"</p>
+			<p style="text-align: justify">en cuyo caso sus hijos serían "hcfab", "hcfad", "hcfae", y "hcfag". Por su parte los hijos de "hcfag" serían "hcfagb", "hcfagd", y "hcfage", y así sucesivamente.</p>
+			</li>
+		</ul>
+
+		<ul>
+			<li style="text-align: justify">
+			Siguiendo la idea general, cada hoja del árbol representa a un objeto del espacio de búsqueda, es decir un objeto que ya no se puede extender. Por ejemplo, en el caso de las partida de ajedrez, una hoja representará un tablero en posición de jaque-mate. En el caso de las permutaciones, una hoja representa una posible permutación de todos los elementos. Y en el caso del laberinto, una hoja representa a un camino que llegó hasta un punto en donde no hay opción de continuar.
+			</li>
+			<li style="text-align: justify">
+			Una clave importante está en cómo representar a los objetos (parciales y las hojas) de manera ordenada y que consideren todo lo necesario para el problema (y no más que lo necesario). Hay casos simples, como las permutaciones, y casos más complicados (como el laberinto) y aprender a hacerlo bien requiere práctica.
+			</li>
+		</ul>
+		<p>2) Recorrer el espacio de manera ordenada</p>
+		<ul>
+			<li style="text-align: justify">
+			 Para poder recorrer el espacio de búsqueda completo, se comienza en la raíz del árbol de backtracking. Este es un recorrido "implícito", el árbol no se construye como tal, y el código del Backtracking será el encargado de este recorrido.
+			</li>
+			<li style="text-align: justify">
+			Lo más natural es hacer un recorrido recursivamente.
+			</li>
+			<li style="text-align: justify">
+			Conceptualmente se comienza en la raiz del árbol, la que representa al objeto inicial.
+			</li>
+			<li style="text-align: justify">
+			Cuando me encuentro en un nodo cualquiera, si este no es una hoja, sigo recorriedo por cada uno de sus hijos (en algún orden). Lo que realmente hace el backtraking es construir un objeto parcial desde el que representa el nodo actual en el que me encuentro, y seguir recorriendo por ese objeto.
+			</li>
+			<li style="text-align: justify">
+			Al llegar a una hoja del árbol estoy en un punto del espacio de búsqueda y puedo probrar entonces si satisface la propiedad que busco o tomar cualquier decisión que se necesite según el problema. Por ejemplo, si simplemente estoy buscando un objeto que cumpla cierta propiedad, entonces chequeo esa propiedad sobre el objeto y tomo una decisión dependiendo de si la cumple o no. Por ejemplo, suponga que quiero imprimir en pantalla todas las permutaciones de 8 letras {a,b,c,d,e,f,g,h} tales que la letra "e" aparece dos posiciones antes que la letra "a". Si llego a la hoja (permutación) "hefagdbc" entonces la imprimo, pero si llego a la hoja "fabcdegh" no la imprimo.
+			</li>
+			<li style="text-align: justify">
+			Cuando para un nodo termino de procesar todas las posibilidades que salen desede él, entonces "vuelvo" al padre del nodo para seguir chequeando. Se dice que "hacemos backtraking" para continuar con el procesamiento.
+			</li>
+		</ul>
+		<h3>========================</h3>
+		<p style="text-align: justify">
+		Un esquema de procedimiento recursivo general de backtracking sería el siguiente:	
+		</p>
+		<code>
+			<div style="background-color:#F5ECCE; margin-right: 350px; border: 2px groove grey;">
+				<ol>
+					<li>BackTracking(objeto_parcial P)</li>
+					<li>if P es un objeto del espacio de búsqueda // llegué a una hoja</li>
+					<li>tomo una decisión                     // cuento, sumo, imprimo, etc</li>
+					<li> else</li>
+					<li> para todas las formas de construir un nuevo objeto desde P</li>
+					<li>construyo el objeto P' desde P</li>
+					<li>llamo a BackTracking(P')</li>
+					<li>return                                    // terminé de chequear todas las opciones desde P</li>
+				</ol>
+			</div>
+		</code>
+		<p style="text-align: justify">El llamado inicial para comenzar con el Backtracking se hace con el objeto inicial (lista vacía, tablero de ajedrez inicial, etc.)</p>
+		<p></p>
+		<p style="text-align: justify">
+			Como un ejemplo más concreto, si tengo que imprimir todas las permutaciones de {a,b,c,d,e,f,g,h} que cumplen cierta propiedad, el procedimiento se vería así:
+		</p>
+		<code>
+			<div style="background-color:#F5ECCE; margin-right: 350px; border: 2px groove grey;">
+				<ol>
+					<li>BackTracking(objeto_parcial P)</li>
+					<li>if P tiene largo 8 			     // es un objeto del espacio de búsqueda</li>
+					<li>if P cumple la propiedad</li>
+					<li> else</li>
+					<li> para cada elemento K en {a,b,c,d,e,f,g,h} no mencionado en P</li>
+					<li>construyo la permutación P' como P seguido de K</li>
+					<li>llamo a BackTracking(P')</li>
+					<li>return</li>
+				</ol>
+			</div>
+		</code>
+	</div>
+</body>

@@ -1,0 +1,39 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<title>Búsqueda Binaria</title>
+</head> 
+<body style = "margin-left: 100px">
+	<div  style = "padding: 30px; align-content: center;">
+		<h3>Búsqueda Binaria</h3>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/jf1baieXkSQ" frameborder="0" allowfullscreen></iframe>
+		<p>Una vez que vean el video, podrán entender este (pseudo)código de BB que en general debiera ser suficiente para (casi) todo lo que necesiten.</p>
+
+		<p>// A: inicio del espacio de búsqueda</p>
+		<p>// B: fin del espacio de búsqueda</p>
+		<p>// Requiere que la propiedad sea "monótona": es falsa hasta cierto punto, desde donde es siempre verdadera.</p>
+		<p>// Busca el primer valor entre A y B que hace la propiedad</p>
+		<code>
+			<div style="background-color:#F5ECCE; margin-right: 350px; border: 2px groove grey;">
+				<ol>
+					<li>while (A < B){</li>
+					<li>	mid = A + (B - A)/2;</li>
+					<li>	if( /* propiedad es cierta en mid */) {</li>
+					<li>		B = mid;</li>
+					<li>	else</li>
+					<li>		A = mid + 1; </li>
+					<li>	}</li>
+					<li>	if( /* propiedad es falsa en A */)</li>
+					<li>		/* quejarse! la propiedad es falsa para todos los valores entre A y B */</li>
+					<li>	else</li>
+					<li>		/* A (que es igual a B) es el menor valor del espacio de búsqueda donde la propiedad es cierta */</li>
+				</ol>
+			</div>
+		</code>
+		<p></p>
+		<h3>===== Material Adicional ======</h3>
+<p>Por si necesitan más material, el siguiente es el video completo de BB con discusión de algunos problemas (dura más de una hora)</p>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/IgjP5zcwR1E" frameborder="0" allowfullscreen></iframe>
+		<p></p>
+		<p>Un tutorial(en inglés) muy bueno y completo lo pueden encontrar <a href="https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/"> acá</a></p>
+</body>
