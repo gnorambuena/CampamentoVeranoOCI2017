@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Backtracking</title>
 </head> 
 <body style = "margin-left: 50px; margin-right: 50px">
@@ -75,13 +76,14 @@
 			<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
 				<ol>
 					<li>BackTracking(objeto_parcial P)</li>
-					<li>if P es un objeto del espacio de búsqueda // llegué a una hoja</li>
-					<li>tomo una decisión                     // cuento, sumo, imprimo, etc</li>
-					<li> else</li>
-					<li> para todas las formas de construir un nuevo objeto desde P</li>
-					<li>construyo el objeto P' desde P</li>
-					<li>llamo a BackTracking(P')</li>
-					<li>return                                    // terminé de chequear todas las opciones desde P</li>
+					<li style = "padding-left: 2em;"><p class = keyword>if</p> P es un objeto del espacio de búsqueda <p class = comment>// llegué a una hoja</p></li>
+					<li style = "padding-left: 4em;">tomo una decisión                     <p class = comment>// cuento, sumo, imprimo, etc</p></li>
+					<li style = "padding-left: 2em;"> <p class = keyword>else</p></li>
+					<li style = "padding-left: 4em;"> para todas las formas de construir un nuevo objeto desde P</li>
+					<li style = "padding-left: 4em;">construyo el objeto P' desde P</li>
+					<li style = "padding-left: 4em;">llamo a BackTracking(P')</li>
+					<li style = "padding-left: 2em;">
+					<p class = keyword>return</p>                                    <p class = comment>// terminé de chequear todas las opciones desde P</p></li>
 				</ol>
 			</div>
 		</code>
@@ -91,16 +93,38 @@
 			Como un ejemplo más concreto, si tengo que imprimir todas las permutaciones de {a,b,c,d,e,f,g,h} que cumplen cierta propiedad, el procedimiento se vería así:
 		</p>
 		<code>
-			<div style="background-color:#FFFFDF; margin-right: 350px; border: 2px groove grey;">
+			<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
 				<ol>
 					<li>BackTracking(objeto_parcial P)</li>
-					<li>if P tiene largo 8 			     // es un objeto del espacio de búsqueda</li>
-					<li>if P cumple la propiedad</li>
-					<li> else</li>
-					<li> para cada elemento K en {a,b,c,d,e,f,g,h} no mencionado en P</li>
-					<li>construyo la permutación P' como P seguido de K</li>
-					<li>llamo a BackTracking(P')</li>
-					<li>return</li>
+					<li style = "padding-left: 2em">
+						<p class = keyword>
+						if
+						</p> 
+						P tiene largo 8 
+						<p class = comment>
+							// es un objeto del espacio de búsqueda</p>
+						</li>
+					<li style = "padding-left: 4em">
+						<p class = keyword>
+							if 
+						</p>
+						P cumple la propiedad</li>
+					<li style = "padding-left: 6em">
+						imprimir P
+					</li>
+					<li style = "padding-left: 4em">
+						<p class = keyword>	
+							else
+						</p>
+					</li>
+					<li style ="padding-left: 6em"> para cada elemento K en {a,b,c,d,e,f,g,h} no mencionado en P</li>
+					<li style ="padding-left: 6em">construyo la permutación P' como P seguido de K</li>
+					<li style ="padding-left: 6em">llamo a BackTracking(P')</li>
+					<li style ="padding-left: 2em">
+						<p class = keyword>
+							return
+						</p>
+					</li>
 				</ol>
 			</div>
 		</code>
