@@ -18,3 +18,8 @@ p {
 	background-color:#FCFCE0;
 	margin-right: 350px; 
 }
+
+.content {
+	padding: 30px;
+	align-content: center;
+}

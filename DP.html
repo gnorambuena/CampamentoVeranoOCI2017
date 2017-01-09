@@ -5,115 +5,175 @@
 	<title>Programación Dinámica</title>
 </head> 
 <body style = "margin-right: 50px; margin-left: 50px">
-	<h3>Motivación</h3>
+	<div class = content>
+		<h3>Motivación</h3>
 
-	<p>Recursión</p>
-	<p>Se define la sucesión de Fibonacci de la siguiente forma:</p>
-	<code>
+		<p>Recursión</p>
+		<p>Se define la sucesión de Fibonacci de la siguiente forma:</p>
+		<code>
+			<ol>
+				<li>f(0) = 0;</li>
+				<li>f(1) = 1;</li>
+				<li>f(n) = f(n-1) + f(n-2)</li>
+			</ol>
+		</code>
+		<p>
+		La complejidad usando recursión es &Omicron;(exp(n)), que es muy costoso
+		computacionalmente.
+		</p>
+		<p>===================</p>
+		<h3>Programación Dinámica</h3>
+		<p style="text-align: justify">
+			Paradigma de resolución de problemas, en el que se identifica unaserie de subproblemas, y luego se resuelven desde el más pequeño,usando las soluciones de problemas menores para resolver los más grandes.
+		</p>
+
+		<p>
+			Se utiliza cuando se cumplen las siguientes condiciones:
+		</p>
 		<ol>
-			<li>f(0) = 0;</li>
-			<li>f(1) = 1;</li>
-			<li>f(n) = f(n-1) + f(n-2)</li>
+			<li>
+				Solución general es función de soluciones a subproblemas.
+			</li>
+			<li>
+				Superposición de subproblemas (opcional).
+			</li>
 		</ol>
-	</code>
-	<p>La complejidad usando recursión es &Omicron;(exp(n)), que es muy costoso
-	computacionalmente.</p>
-	<p>===================</p>
-	<h3>Programación Dinámica</h3>
-	<p style="text-align: justify">
-		Paradigma de resolución de problemas, en el que se identifica unaserie de subproblemas, y luego se resuelven desde el más pequeño,usando las soluciones de problemas menores para resolver los más grandes.
-	</p>
-
-	<p>Se utiliza cuando se cumplen las siguientes condiciones:</p>
-	<ol>
-		<li>Solución general es función de soluciones a subproblemas.</li>
-		<li>Superposición de subproblemas (opcional).</li>
-	</ol>
-	<code>
-		<ol>
-		<li>f(0) = 0</li>
-		<li>f(1) = 1</li>
-		<li>f(n) = f(n-1) + f(n-2) // Primera condición</li>
+		<code>
+			<ol>
+			<li>f(0) = 0</li>
+			<li>f(1) = 1</li>
+			<li>f(n) = f(n-1) + f(n-2) // Primera condición</li>
+			<p></p>
+			<li>f(n-1) = f(n-2) + f(n-3) // Segunda condición</li>
+			<li>...</li>
+			</ol>
+		</code>
+		<p>Entonces, podemos usar programación dinámica.</p>
 		<p></p>
-		<li>f(n-1) = f(n-2) + f(n-3) // Segunda condición</li>
-		<li>...</li>
+		<h3>Esquemas de Resolución usando programación dinámica.</h3>
+		<ol>
+			<li style = "text-align: justify;">
+				Top-down: resolvemos subproblemas a medida que los vayamos necesitando, si es que no lo hemos calculado previamente. <b>¡Cuidado con desbordar la pila!</b>
+			</li>
+			<li style = "text-align: justify;">
+				 Bottom-up: resolvemos subproblemas “base”, y luego todos lossubproblemas hacia arriba hasta resolver el problema inicial.
+			</li>
 		</ol>
-	</code>
-	<p>Entonces, podemos usar programación dinámica.</p>
-	<p></p>
-	<h3>Esquemas de Resolución usando programación dinámica.</h3>
-	<ol>
-		<li style = "text-align: justify;">
-			Top-down: resolvemos subproblemas a medida que los vayamos necesitando, si es que no lo hemos calculado previamente. <b>¡Cuidado con desbordar la pila!</b>
-		</li>
-		<li style = "text-align: justify;">
-			 Bottom-up: resolvemos subproblemas “base”, y luego todos lossubproblemas hacia arriba hasta resolver el problema inicial.
-		</li>
-	</ol>
-	<h3>Resolución top-down</h3>
-	<p></p>
-	<p>
-	Cada vez que calculemos f para algún i, lo guardaremos en una tabla. Si necesitamos un valor de f, revisamos esta tabla y lo calculamos sólo si no está.
-	</p>
-	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
-			<ol>
-				<li>vector&lt;long&gt; mem(N, 0); //N suficientemente grande</li>
-				<p></p>
-				<li>long fibo(int n) {</li>
-				<li>if (n<=1) </li>
-				<li style = "padding-left:2em">return n;</li>
-				<li>if (mem[n] != 0 )</li>
-				<li style = "padding-left:2em">return mem[n];</li>
-				<li>else</li>
-				<li style = "padding-left:2em">return mem[n] = fibo(n-1) + fibo(n-2);</li>
-				<li>}</li>
-			</ol>
-		</div>
-	</code>
-	<h3>Resolución bottom-up</h3>
-	<p>Completamos la tabla hasta el valor requerido.</p>
-	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
-			<ol>
-				<li>vector&lt;long&gt; mem(N,0);</li>
-				<p></p>
-				<li>long fibo(int n) {</li>
-				<li style = "padding-left:2em">mem[0] = 0;</li>
-				<li style = "padding-left:2em">mem[1] = 1;</li>
-				<li style = "padding-left:2em">for ( int i = 2 ; i <= n; i++) {</li>
-				<li style = "padding-left:3em">mem[i] = mem[i-2] + mem[i-1];</li>
-				<li style = "padding-left:2em">}</li>
-				<li style = "padding-left:2em">return mem[n];</li>
-				<li>}</li>
-			</ol>
-		</div>
-	</code>
-	<p>===================</p>
-	<h3>Subproblemas</h3>
-	<p style = "text-align:justify"> Al usar programación dinámica, las preguntas que uno debe responder son:</p>
-	<p></p>
-	<ol>
-		<li>¿Cuáles son los subproblemas?</li>
-		<li>¿Cómo se relacionan los subproblemas?</li>
-	</ol>
-	<p style = "text-align:justify;"> No existe una técnica secreta para encontrar los subproblemas. La práctica y experiencia es la mejor forma de identificar soluciones de programación dinámica.</p>
-	<p style = "text-align:justify;">En cuanto a la relación entre subproblemas, estos deben ser deducidos a partir de las reglas del problema particular que sequiere resolver.</p>
-	<p>===================</p>
-	<h3>Ejemplos</h3>
-	<p></p>
-	<h4>Secuencia creciente más larga</h4>
-	<p style = "text-align: justify;"> Dado un arreglo de números, determinar el largo de la secuencia (no necesariamente contigua) más larga.</p>
-	<p style = "text-align: justify;"> Ej.: 25; 85; 36; 87; 61; 6; 96; 21; 47; 58.</p>
-	<p></p>
-	<p>Dos algoritmos:</p>
-	<ul>
-		<li>Subproblemas: LIS hasta posición i (&omicron;(n^2))</li>
-		<li>Subproblemas: posición en la que termina la secuencia creciente de largo n (&omicron;(n*log(k)))</li>
-	</ul>
-	<h3>===== Material Adicional ======</h3>
-		<p>Por si necesitan más material, el siguiente es el video completo de DP (dura más de una hora).</p>
+		<h3>Resolución top-down</h3>
+		<p></p>
+		<p>
+			Cada vez que calculemos f para algún i, lo guardaremos en una tabla. Si necesitamos un valor de f, revisamos esta tabla y lo calculamos sólo si no está.
+		</p>
+		<code>
+			<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+				<ol>
+					<li>
+						vector&lt;long&gt; mem(N, 0); //N suficientemente grande
+					</li>
+					<p></p>
+					<li>
+						long fibo(int n) {
+					</li>
+					<li>
+						if (n<=1) 
+					</li>
+					<li style = "padding-left:2em">
+						return n;
+					</li>
+					<li>
+						if (mem[n] != 0 )
+					</li>
+					<li style = "padding-left:2em">
+						return mem[n];
+					</li>
+					<li>
+						else
+					</li>
+					<li style = "padding-left:2em">
+						return mem[n] = fibo(n-1) + fibo(n-2);
+					</li>
+					<li>
+						}
+					</li>
+				</ol>
+			</div>
+		</code>
+		<h3>Resolución bottom-up</h3>
+		<p>Completamos la tabla hasta el valor requerido.</p>
+		<code>
+			<div class = codediv>
+				<ol>
+					<li>
+						vector&lt;long&gt; mem(N,0);
+					</li>
+					<p></p>
+					<li>
+						long fibo(int n) {
+					</li>
+					<li style = "padding-left:2em">
+						mem[0] = 0;
+					</li>
+					<li style = "padding-left:2em">
+						mem[1] = 1;
+					</li>
+					<li style = "padding-left:2em">
+						for ( int i = 2 ; i <= n; i++) {
+					</li>
+					<li style = "padding-left:3em">
+						mem[i] = mem[i-2] + mem[i-1];
+					</li>
+					<li style = "padding-left:2em">
+						}
+					</li>
+					<li style = "padding-left:2em">
+						return mem[n];
+					</li>
+					<li>
+						}
+					</li>
+				</ol>
+			</div>
+		</code>
+		<p>===================</p>
+		<h3>Subproblemas</h3>
+		<p> 
+			Al usar programación dinámica, las preguntas que uno debe responder son:
+		</p>
+		<p></p>
+		<ol>
+			<li>¿Cuáles son los subproblemas?</li>
+			<li>¿Cómo se relacionan los subproblemas?</li>
+		</ol>
+		<p> 
+			No existe una técnica secreta para encontrar los subproblemas. La práctica y experiencia es la mejor forma de identificar soluciones de programación dinámica.
+		</p>
+		<p>
+			En cuanto a la relación entre subproblemas, estos deben ser deducidos a partir de las reglas del problema particular que sequiere resolver.
+		</p>
+		<p>===================</p>
+		<h3>Ejemplos</h3>
+		<p></p>
+		<h4>Secuencia creciente más larga</h4>
+		<p> 
+			Dado un arreglo de números, determinar el largo de la secuencia (no necesariamente contigua) más larga.
+		</p>
+		<p>Ej.: 25; 85; 36; 87; 61; 6; 96; 21; 47; 58.</p>
+		<p></p>
+		<p>Dos algoritmos:</p>
+		<ul>
+			<li>Subproblemas: LIS hasta posición i (&omicron;(n^2))</li>
+			<li>Subproblemas: posición en la que termina la secuencia creciente de largo n (&omicron;(n*log(k)))</li>
+		</ul>
+		<h3>===== Material Adicional ======</h3>
+			<p>
+			Por si necesitan más material, el siguiente es el video completo de DP (dura más de una hora).
+			</p>
 			<iframe width="560" height="315" src="https://www.youtube.com/embed/AXmk2gxC_Ew" frameborder="0" allowfullscreen></iframe>
-			<p>Otra discusión muy buena se puede encontrar <a href="https://youtu.be/GSphYSWiHxU"> aqui.</a></p>
-			<p>Un tutorial(en inglés) muy bueno y completo lo pueden encontrar <a href="https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/"> acá</a></p>
+			<p>
+			Otra discusión muy buena se puede encontrar <a href="https://youtu.be/GSphYSWiHxU"> aqui.</a>
+			</p>
+			<p>
+			Un tutorial(en inglés) muy bueno y completo lo pueden encontrar <a href="https://www.topcoder.com/community/data-science/data-science-tutorials/dynamic-programming-from-novice-to-advanced/"> acá</a>
+			</p>
+	</div>
 </body>
