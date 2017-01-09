@@ -1,0 +1,248 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Segment Tree</title>
+</head> 
+<body style = "margin-right: 50px; margin-left: 50px">
+	<h3>Segment Tree</h3>
+	<p></p>
+	<p style = "text-align: justify;">
+		El ST es una estructura de datos muy versátil que sirve para responder varias consultas de agregación tipo máximo, mínimo, sumas, promedio, multiplicaciones y otras menos estándar, en tiempo log N para un universo de N elementos. Típicamente el ST se construye para responder consultas sobre un arreglo (como "entrégame el mínimo valor entre los índices i y j del arreglo"). También se pueden hacer actualizaciones de elementos de ese arreglo que tardan tiempo log N. Si tenemos entonces un problema donde hay Q consultas (preguntas por rango y actualizaciones de elementos) sobre un arreglo de largo N, el tiempo total de la solución con ST será &Omicron;(Q log N) más el tiempo de construcción incial del ST (que se puede lograr en &Omicron;(N log N)).
+	</p>
+
+	<h4>Problemas</h4>
+	<p style = "text-align: justify;">Semana 1</p>
+	<ul>
+		<li> (opcional) Range Minimum Query
+		<a href = "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">judge.u-aizu.ac.jp/ ... ption.jsp?id=DSL_2_A</a>
+		</li>
+		<li>(opcional) Fenwick Trees 
+		<a href = "http://www.spoj.com/problems/FENTREE/">www.spoj.com/problems/FENTREE/</a>
+		</li>
+		<li>
+		(obligatorio) Interval Products
+			<a href = "https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=572&page=show_problem&problem=4150"> icpcarchive.ecs.baylor.edu/ ... problem&problem=4150</a>
+		</li>
+	</ul>
+	<p style = "text-align: justify;">Semana 2</p>
+	<ul>
+		<li>(obligatorio) Maximum Sum
+		<a href = "http://www.spoj.com/problems/KGSS/">www.spoj.com/problems/KGSS/</a></li>
+		<li>(obligatorio) Frequent Values
+			<a href="https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2176">uva.onlinejudge.org/ ... problem&problem=2176</a>
+		</li>
+		<li>(opcional) Jupiter Attacks
+			<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=531&page=show_problem&problem=3809">
+				icpcarchive.ecs.baylor.edu/ ... problem&problem=3809
+			</a>
+		</li>
+		<li>
+			(opcional) Divisors
+			<a href ="http://www.spoj.com/problems/EC_DIVS/">
+				http://www.spoj.com/problems/EC_DIVS/
+			</a>
+		</li>
+	</ul>
+	<p style = "text-align: justify;">
+		Los dos problemas opcionales de la Semana 1 son directos desde los códigos que les estamos entregando (ver abajo), así que les recomendamos que los hagan para que prueben la implementación y vean cómo funciona. Ojo que uno es un problema del tema anterior que también se puede resolver con ST. Los problemas de la Semana 2 no son fáciles para que empiecen a programar cuanto antes. Y ojo que acá ya aparecen problemas de competencias reales de programación competitiva!
+	</p>
+	<p style ="text-align: justify;">
+		Tenemos un par de videos que están bien ordenados para aprender esta estructura. Los dos videos los pueden encontrar acá:
+	</p>
+
+	<ul>
+		<li>Segment Tree en Campamento de Invierno 2015:</li>
+	</ul>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/hW7g-vcDoGU" frameborder="0" allowfullscreen></iframe>
+	<ul>
+		<li>Segment Tree en DCC 2014 (solo ver hasta el minuto 48:44):</li>
+	</ul>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/3aAIVFYQT3Q" frameborder="0" allowfullscreen></iframe>
+	<p></p>
+	<p style = "text-align: justify;">En el primero está un poco más pulida la explicación pero es un poco más largo. El segundo es más "familiar" porque eramos poquitos en el DCC. Ustedes decidan pero ambos videos son equivalentes conceptualmente.</p>
+	<p style = "text-align: justify;">
+		Después de que vean los videos van a entender la implementación del ST. Abajo encuentran una implementación "didáctica" para un ST que responde consultas de mínimos por rango en un arreglo (funcion query) y actualizaciones de los valores del arreglo (función update). En el material docente les dejaremos las versiones para hacer consultas de sumas por rango y una versión más general que se puede adaptar para cubrir otras operaciones (vean el video para entender!)
+	</p>
+	<code>
+		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+			<ol>
+				<li>
+				<p class = comment>
+				//Implementacion didáctica</p>
+				</li>
+				<li>
+					<p class = keyword>class</p> SegmentTreeRMQ {
+				</li>
+				<li style = "padding-left:2em">
+					<p class = comment>
+					// st es el arreglo de nodos del segment tree
+					</p>
+				</li>
+				<li style = "padding-left:2em">vector&lt;
+					<p class = keyword>long long</p>&gt; arr, st;</li>
+				<li style = "padding-left:2em"><p class = comment>// leaf guarda la ubicación de cada hoja en st</p></li>
+				<li style = "padding-left:2em;">vector&lt;<p class = keyword>int</p>&gt; leaf; int n;</li>
+				<li></li>
+				<li style = "padding-left:2em"><p class = comment>// construir nodo u, que representa al rango [i,j]</p></li>
+				<li style = "padding-left:2em"><p class = keyword>void</p> build(<p class = keyword>int</p> u, <p class = keyword>int</p> i, <p class = keyword>int</p> j) {</li>
+				<li style = "padding-left:4em"><p class = comment>
+				// caso de que el rango representa una hoja
+				</p></li>
+				<li style = "padding-left:4em"><p class = keyword>if</p> (i == j) {</li>
+				<li style = "padding-left:6em">leaf[i] = u;</li>
+				<li style = "padding-left:6em">st[u] = arr[i];</li>
+				<li style = "padding-left:6em"><p class = keyword>return;</p>
+				<li style = "padding-left:4em">}</li>
+				<li style = "padding-left:4em"><p class = comment>// l y r son los hijos izquierdo y derecho de u</p></li>
+				<li style = "padding-left:4em"><p class = keyword>int</p> m = (i+j)/2, l = u*2+1, r = u*2+2;</li>
+				<li style = "padding-left:4em">build(l, i, m);</li>
+				<li style = "padding-left:4em">build(r, m+1, j);
+				<p class = comment> // es importante el +1</p></li>
+				<li style = "padding-left:4em">st[u] = min(st[l], st[r]) <p class = comment>// range min. query</p></li>
+				<li style = "padding-left:2em">}</li>
+				<li style = "padding-left:2em"></li>
+				<li style = "padding-left:2em">
+				<p class = comment>// query en el rango [a,b], considerando que nos</p></li>
+				<li style = "padding-left:2em"><p class = comment>// encontramos en el nodo u que representa a [i,j]</p>
+				</li>
+				<li style = "padding-left:2em"><p class = keyword>long long</p> query(<p class = keyword>int</p> a, <p class = keyword>int</p> b, <p class = keyword>int</p> u, <p class = keyword>int</p> i, <p class = keyword>int</p> j) {</li>
+				<li style = "padding-left:4em"><p class = comment>// nodo fuera del rango [a,b], retornar neutro</p></li>
+				<li style = "padding-left:4em"><p class = keyword>if</p>
+				(j < a or b < i)</li>
+				<li style = "padding-left:6em"><p class = keyword>return</p> 1e18; <p class = comment>//infinito = neutro del mín.</p>
+				<li style = "padding-left:4em"><p class = comment>// nodo totalmente contenido en [a,b]</p>
+				<li style = "padding-left:4em"><p class = keyword>if </p>(a <= i and j <= b)</li>
+				<li style = "padding-left:6em"><p class = keyword>return </p>
+				st[u]; <p class = comment>// responder directamente</p>
+				</li>
+				<li style = "padding-left:4em"><p class = comment>// si no, componer queries de ambos hijos</p></li>
+				<li style = "padding-left:4em"><p class = keyword>int </p>m = (i+j)/2, l = u*2+1, r = u*2+2;</li>
+				<li style = "padding-left:4em"><p class = keyword> long long </p>x = query(a, b, l, i, m);</li>
+				<li style = "padding-left:4em"><p class = keyword> long long </p>y = query(a, b, r, m+1, j);<p class = comment>// +1 !!</p>
+				</li>
+				<li style = "padding-left:4em"><p class = keyword>return </p>
+				min(x,y);</li>
+				<li style = "padding-left:2em">}</li>
+				<li style = "padding-left:2em"></li>
+				<li style = "padding-left:2em"><p class = comment>// actualizar nodo u considerando que uno de sus</p>
+				</li>
+				<li style = "padding-left:2em"><p class = comment>// hijos fue actualizado antes (o es una hoja)</p></li>
+
+				<li style = "padding-left:2em"><p class = keyword>void </p>update(<p class = keyword>int</p> u) {</li>
+				<li style = "padding-left:4em"><p class = keyword>int </p>l = u*2+1, r = u*2+2;</li>
+				<li style = "padding-left:4em">st[u] = min(st[l], st[r]); <p class = comment> // actualizar info</p></li>
+				<li style = "padding-left:4em"><p class = comment>// si no es la raíz (nodo 0) actualizar padre</p></li>
+				<li style = "padding-left:4em"><p class = keyword>if </p>(u != 0) update((u-1)/2);</li>
+				<li style = "padding-left:2em">}</li>
+				<li style = "padding-left:2em"></li>
+				<li style = "padding-left:2em"><p class = keyword>public</p>:</li>
+				<li style = "padding-left:4em">
+				<p class = comment>// construir segment tree a partir de un vector</p></li>
+				<li style = "padding-left:4em">SegmentTreeRMQ(vector&lt;<p class = keyword>long long</p>&gt;& v) {</li>
+				<li style = "padding-left:6em"> arr = v;</li>
+				<li style = "padding-left:6em"> n = v.size();</li>
+				<li style = "padding-left:6em"> leaf.resize(n);</li>
+				<li style = "padding-left:6em"> 
+					<p class = comment>
+						// reservar tamaño para el peor caso, 4*N
+					</p>
+				</li>
+				<li style = "padding-left:6em">st.resize(n*4+5);</li>
+				<li style = "padding-left:6em"> 
+					<p class = comment>
+						// construir desde la raíz
+					</p>
+				</li>
+				<li style = "padding-left:6em"> build(0, 0, n-1);</li>
+				<li style = "padding-left:4em"> }</li>
+				<li style = "padding-left:4em"> </li>
+				<li style = "padding-left:4em">
+					<p class = comment>
+						// [a,b] es inclusivo inclusivo, indexado desde 0
+					</p>
+				</li>
+				<li style = "padding-left:4em">
+					<p class = keyword>
+						long long 
+					</p>
+					query (
+					<p class = keyword>
+						int
+					</p>
+					a,
+					<p class = keyword>
+						int
+					</p>
+					b) {
+				</li>
+				<li style = "padding-left:4em">
+					<p class = comment>
+						// responder query procesando desde la raíz
+					</p>
+				</li>
+				<li style = "padding-left:6em">
+					<p class = keyword>
+						return
+					</p>
+					query(a, b, 0, 0, n-1);
+				</li>
+				<li style = "padding-left:4em">}</li>
+				<li style = "padding-left:4em"> </li>
+				<li style = "padding-left:4em">
+					<p class = comment>
+						// setea un valor en cierto índice del arreglo
+					</p>
+				</li>
+				<li style = "padding-left:4em">
+					<p class = keyword>
+						void 
+					</p>
+					update(
+					<p class = keyword>
+					int
+					</p>
+					 index, 
+					<p class = keyword>
+					long long 
+					</p>
+					value) {
+				</li>
+				<li style = "padding-left:6em">
+					<p class = keyword>
+						int
+					</p>
+					 u = leaf[index];
+				</li>
+				<li style = "padding-left:6em">
+				arr[index] = value;
+				</li>
+
+				<li style = "padding-left:6em">
+					st[u] = arr[index];
+				</li>
+
+				<li style = "padding-left:6em">
+					<p class = comment>
+						// chequea si la hoja es raíz por si N = 1
+					</p>
+				</li>
+				<li style = "padding-left:6em">
+					<p class = keyword>
+						if 
+					</p>
+					(u != 0) update((u-1)/2);
+				</li>
+				<li style = "padding-left:4em">
+					}
+				</li>
+				<li style = "padding-left:2em">
+					};
+				</li>
+			</ol>
+		</div>
+	</code>
+	<p>
+		Con un poco más de esfuerzo el ST puede soportar consultas por rangos y actualizaciones por rango, pero la programación es bastante más difícil. Para los que se sientan aventureros pueden intentar implementar esta versión que se llama ST con LazyUpdate. 
+	</p>
+</body>

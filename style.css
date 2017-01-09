@@ -1,0 +1,13 @@
+p {
+	text-align: justify;
+}
+
+.comment {
+	color:#999999;
+	display:inline;
+}
+
+.keyword {
+	color:#2E2EFE;
+	display:inline;
+}
