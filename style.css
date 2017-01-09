@@ -11,3 +11,10 @@ p {
 	color:#2E2EFE;
 	display:inline;
 }
+
+.codediv {
+	border-style: dotted;
+	border-width: 1px;
+	background-color:#FCFCE0;
+	margin-right: 350px; 
+}

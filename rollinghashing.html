@@ -91,7 +91,7 @@
 		Ahora algunos detalles de la técnica. Suponga que tenemos un string S de largo N, luego el string está definido por los valores en cada una de sus posiciones S[0],S[1],...,S[N-1]. La función de Hash que usaremos tendrá dos parámetros un parámetro B y un parámetro L, y para el substring S' de largo k que comienza en la posición i se calculará como:
 	</p>
 	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 					H(S')  =  ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) )  MOD L
@@ -103,7 +103,7 @@
 		Note que con esta definición el tiempo que tardaría calcular H(S') es lineal en el largo de S' lo que no nos ahorra nada. Para mejorar esto usaremos el siguiente truco. Precomputaremos recursivamente los siguientes valores:
 	</p>
 	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 					G[N-1] = S[N-1]
@@ -118,7 +118,7 @@
 		Note que esta computación se puede hacer en tiempo lineal O(N). Note también que para todo j se tiene que
 	</p>
 	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 					G[j] = ( S[j] + S[j+1]*B + S[j+2]*B^2 + .... + S[N-1]*B^(N-j) ) MOD L
@@ -130,7 +130,7 @@
 		Suponga ahora que quisiéramos calcular H(S') para S' el substring S[i..i+(k-1)] (el substring que comienza en la posición i y tiene largo k). Este valor se puede calcular simplemente como:
 	</p>
 	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 					H(S') = ( G[i] - G[i+k]*B^k ) MOD L
@@ -142,7 +142,7 @@
 		o sea, usando solo una cantidad constante de operaciones. La razón por la que se puede calcular así, es muy simple y está dada por la forma en que se puede escribir H(S'):
 	</p>
 		<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 					H(S') = ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) ) MOD L

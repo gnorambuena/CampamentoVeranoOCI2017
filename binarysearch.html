@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Búsqueda Binaria</title>
 </head> 
 <body style = "margin-left: 100px">
@@ -14,19 +15,19 @@
 		<p>// Requiere que la propiedad sea "monótona": es falsa hasta cierto punto, desde donde es siempre verdadera.</p>
 		<p>// Busca el primer valor entre A y B que hace la propiedad</p>
 		<code>
-			<div style="background-color:#FFFFDF; margin-right: 350px; border: 2px groove grey;">
+			<div class = codediv>
 				<ol>
-					<li>while (A < B){</li>
+					<li><p class = keyword>while</p> (A < B){</li>
 					<li style = "padding-left:2em">mid = A + (B - A)/2;</li>
-					<li style = "padding-left:2em">	if( /* propiedad es cierta en mid */) {</li>
-					<li style = "padding-left:3em">		B = mid;</li>
-					<li style = "padding-left:2em">	else</li>
-					<li style = "padding-left:3em">		A = mid + 1; </li>
+					<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es cierta en mid */) {</li>
+					<li style = "padding-left:4em">		B = mid;</li>
+					<li style = "padding-left:2em">	<p class = keyword>else</p></li>
+					<li style = "padding-left:4em">		A = mid + 1; </li>
 					<li style = "padding-left:2em">	}</li>
-					<li style = "padding-left:2em">	if( /* propiedad es falsa en A */)</li>
-					<li style = "padding-left:3em">		/* quejarse! la propiedad es falsa para todos los valores entre A y B */</li>
-					<li style = "padding-left:2em">	else</li>
-					<li style = "padding-left:3em">		/* A (que es igual a B) es el menor valor del espacio de búsqueda donde la propiedad es cierta */</li>
+					<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es falsa en A */)</li>
+					<li style = "padding-left:4em">		/* quejarse! la propiedad es falsa para todos los valores entre A y B */</li>
+					<li style = "padding-left:2em">	<p class = keyword>else</p></li>
+					<li style = "padding-left:4em">		/* A (que es igual a B) es el menor valor del espacio de búsqueda donde la propiedad es cierta */</li>
 				</ol>
 			</div>
 		</code>
