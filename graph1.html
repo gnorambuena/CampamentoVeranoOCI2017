@@ -1,0 +1,70 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8" />
+	<title>Grafos I</title>
+</head> 
+
+<body style = "margin-right: 50px; margin-left: 50px">
+	<h3>Motivación</h3>
+	<p style = "text-align: justify">El problema de los puentes de Königsberg, también llamado más específicamente problema de los siete puentes de Königsberg, resuelto por Leonhard Euler en 1736 y cuya resolución dio origen a la teoría de grafos.
+
+	<p style = "text-align: justify">Esta ciudad es atravesada por el río Pregel, el cual se bifurca para rodear con sus brazos a la isla Kneiphof, dividiendo el terreno en cuatro regiones distintas, las que entonces estaban unidas mediante siete puentes. El problema fue formulado en el siglo XVIII y consistía en encontrar un recorrido para cruzar a pie toda la ciudad, pasando sólo una vez por cada uno de los puentes, y regresando al mismo punto de inicio. </p>
+	<div>
+	<img src="http://i.imgur.com/BmTrJbd.jpg" height = "300" width = "580">
+	</div>
+	<p style = "text-align: justify;">
+	En un grafo sólo nos preocupamos de las relaciones entre los nodos(es decir, las aristas), pero no del largo ni la forma de las aristas. Luego el problema de los puentes de Konigsberg se puede abstraer como un grafo de la siguiente manera:
+	</p>
+	<div>
+	<img src="http://i.imgur.com/tsIOl7c.png" height = "300" width = "580">
+	</div>
+
+	<p>===================</p>
+	<h3>Definición</h3>
+	<p style = "text-align: justify;">
+		<b>Grafo</b> Un grafo es un par G = (V,E), donde V es el conjunto de nodos(o vértices), y E &sube; V x V es el conjunto de aristas.
+	</p>
+
+	<h4>Grafo Simple</h4>
+	<p style = "text-align: justify;">Si un grafo G no contiene loops ni aristas paralelas, decimos que es un grafo simple.</p>
+	<p>===================</p>
+	<h3>Dirección Aristas</h3>
+	<p style = "text-align: justify;"><b>Grafo no Dirigido
+	</b> Un grafo en el que todas las aristas van a ambos lados.</p>
+	<p style = "text-align: justify;"><b>Grafo Dirigido</b> Un grafo en el que las aristas tienen un único sentido.</p>
+	<img src="http://i.imgur.com/WnblXTE.png" height = "300" width = "580">
+	<p>===================</p>
+	<h3>Camino (simple)</h3>
+	<p style = "text-align: justify;"><b>Camino</b> Secuencia de nodos (distintos) unidos por aristas.</p>
+	<p style = "text-align: justify"><b>Largo</b> Cantidad de aristas en el camino.</p>
+	<p style = "text-align: justify;"><b>Distancia</b> Largo del camino más corto entre dos nodos.</p>
+	<p>===================</p>
+	<h3>Conectividad (Grafos no dirigidos)</h3>
+	<p style = "text-align: justify;"> Un grafo no dirigido se dice <b>conexo</b> si existe un camino entre cada par de nodos.</p>
+	<img src="http://i.imgur.com/uMTUGlE.png" height = "300" width = "580">
+	<p></p>
+	<p style = "text-align: justify;"> Una <b>componente conexa</b> es un subgrafo conexo maximal.</p>
+	<img src="http://i.imgur.com/qtVOTjU.png" height = "350" width = "580">
+	<p>===================</p>
+	<h3>Ciclo (Simple)</h3>
+	<p style = "text-align: justify;"> <b>Ciclo</b> Un ciclo (simple) es un camino que parte y termina en el mismo nodo.</p>
+	<img src="http://i.imgur.com/3qyerZi.png" height = "400" width = "280">
+	<p>===================</p>
+	<h3>Arboles</h3>
+
+	<p style = "text-align: justify;">
+		Un <b>árbol</b> es un grafo conexo G tal que cumple:
+	</p>
+	<ul>
+		<li>G no tiene ciclos.</li>
+		<li>Si se le quia una arista deja de ser conexo.</li>
+		<li>Si se le agrega una arista, G pasa a tener ciclos.</li>
+		<li>Existe un solo camino entre cada par de nodos de G.</li>
+		<li>G tiene <i>n</i> nodos y <i>n-1</i> aristas.
+	</ul>
+	<img src="http://i.imgur.com/J4TOIs5.png" height = "300" width = "400">
+	<p>===================</p>
+	<h3>Representacion de grafos</h3>
+	<p></p>
+	<h4>Matriz de adyacencia</h4>
+</body>
