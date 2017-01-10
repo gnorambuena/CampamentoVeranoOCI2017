@@ -1,16 +1,25 @@
 <!doctype html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Rolling Hashing</title>
 </head> 
 <body style = "margin-right: 50px; margin-left: 50px">
 	<div class = content>
-		<h3>Rolling Hashing</h3>
+		<div class = "page-header">
+			<h2 class = "text-primary">Rolling Hashing</h2>
+		</div>
 		<p></p>
 		<p>
-			El tema de estas semana será la técnica de Rolling Hashing, que sirve para resolver muchos problemas de secuencias o strings. Como motivación, supongan que les dan dos strings S1 y S2, de largos N y M respectivamente, y quieren contar cuántas veces S2 aparece en S1. El tiempo que tarda el algoritmos ingenuo es O(N*M), esto porque para cada posición del S1 debo chequear las M posiciones de S2. Note que comparar strings tarda tiempo proporcional a los largos del string si es que lo hago posición a posición.
+			El tema de esta semana será la técnica de Rolling Hashing, que sirve para resolver muchos problemas de secuencias o strings. Como motivación, supongan que les dan dos strings S1 y S2, de largos N y M respectivamente, y quieren contar cuántas veces S2 aparece en S1. El tiempo que tarda el algoritmos ingenuo es O(N*M), esto porque para cada posición del S1 debo chequear las M posiciones de S2. Note que comparar strings tarda tiempo proporcional a los largos del string si es que lo hago posición a posición.
 		</p>
+		<div class = "page-header">
+			<h2>Explicación</h2>
+		</div>
 		<p>
 			La técnica de Rolling Hashing (RH) lo que hace es preprocesar un string S (en tiempo lineal), para ser capaz de computar una "función de hash" H para cada substring de S. Las principales características de H son las siguientes:
 		</p>
@@ -29,23 +38,34 @@
 			El único "problema" es que es una técnica probabilística, pero veremos cómo enfrentar este problema.
 		</p>
 		<p>
-			Otra cosa interesante que permite RH es determinar si un string es "lexicográficamente menor" usando sólo tiempo logarítmico. Suponga que tienen dos strings S1 y S2 del mismo largo, y quiere saber si en un diccionario S1 debería estar antes que S2 o al revés. Para esto deben encontrar el prefijo más largo que ambos tienen en común y luego comparar el siguiente símbolo. Por ejemplo, suponga que tienen los strings:
+			Otra cosa interesante que permite RH es determinar si un string es "lexicográficamente menor" usando sólo tiempo logarítmico. Suponga que tienen dos strings S1 y S2 del mismo largo, y quiere saber si en un diccionario S1 debería estar antes que S2 o al revés. Para esto deben encontrar el prefijo más largo que ambos tienen en común y luego comparar el siguiente símbolo.
+
 		</p>
-		<p>
-			S1 = abbccabbccabbccabbccabbccabbccabbcc
-		</p>
-		<p>
-			S2 = abbccabbccabbccabbccabbxxabbxxabbxx
-		</p>
-		<p>
-			entonces claramente S1 < S2. Ya que el prefijo más largo que ambos comparten es:
-		</p>
-		<p>
-			P = abbccabbccabbccabbccabb
-		</p>
-		<p>
-			y el siguiente símbolo en S1 es 'c', pero en S2 es 'x'. 
-		</p>
+		<div class="panel panel-primary">
+      		<div class="panel-heading">
+      			<h4>Ejemplo</h4>
+      		</div>
+      		<div class="panel-body">
+      			<p>Suponga que se tienen los strings:</p>
+		
+				<p>
+					S1 = abbccabbccabbccabbccabbccabbccabbcc
+				</p>
+				<p>
+					S2 = abbccabbccabbccabbccabbxxabbxxabbxx
+				</p>
+				<p>
+					entonces claramente S1 < S2. Ya que el prefijo más largo que ambos comparten es:
+				</p>
+				<p>
+					P = abbccabbccabbccabbccabb
+				</p>
+				<p>
+					y el siguiente símbolo en S1 es 'c', pero en S2 es 'x'. 
+				</p>
+      		</div>
+   		</div>
+		
 		<p>
 			Dados strings S1 y S2, para encontrar el prefijo más largo que ambos comparten se puede hacer búsqueda binaria. Inicialmente comparamos los prefijos de S1 y S2 hasta la posición del centro de ambos strings. Si esos prefijos son iguales entonces el prefijo que buscamos debe ser más largo. Si esos prefijos son distintos, entonces el prefijo que buscamos debería ser más corto, y podemos continuar recursivamente haciendo búsqueda binaria en el largo del prefijo buscado.
 		</p>
@@ -56,40 +76,12 @@
 			Video de RH:
 		</p>
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/wv0ADgndMmc" frameborder="0" allowfullscreen></iframe>
-		<p></p>
+		
+		<div class = "page-header">
+			<h2>Detalles de la técnica</h2>
+		</div>
 		<p>
-			Los problemas para resolver en la semana serán los siguientes:
-		</p>
-		<p>
-			Semana 1:
-		</p>
-		<ul>
-			<li>
-				(obligatorio) Glass Bleads <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=660">uva.onlinejudge.org/ ... _problem&problem=660</a>
-			</li>
-			<li>
-				(opcional) Musical Plagiarism <a href = "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2937">uva.onlinejudge.org/ ... problem&problem=2937</a>
-			</li>
-		</ul>
-		<p>
-			Semana 2:
-		</p>
-		<ul>
-			<li>
-				(obligatorio) Power Strings <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1239">uva.onlinejudge.org/ ... problem&problem=1239</a>
-			</li>
-			<li>
-				(obligatorio) Buzzwords <a href = "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=226&page=show_problem&problem=2955">uva.onlinejudge.org/ ... problem&problem=2955</a>
-			</li>
-			<li>
-				 (opcional) Obsessive String <a href = "http://codeforces.com/problemset/problem/494/B">codeforces.com/problemset/problem/494/B</a>
-			</li>
-			<li>
-				(opcional) Matrix Matcher <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1960">uva.onlinejudge.org/ ... problem&problem=1960</a>
-			</li>
-		</ul>
-		<p>
-			Ahora algunos detalles de la técnica. Suponga que tenemos un string S de largo N, luego el string está definido por los valores en cada una de sus posiciones S[0],S[1],...,S[N-1]. La función de Hash que usaremos tendrá dos parámetros un parámetro B y un parámetro L, y para el substring S' de largo k que comienza en la posición i se calculará como:
+			Suponga que tenemos un string S de largo N, luego el string está definido por los valores en cada una de sus posiciones S[0],S[1],...,S[N-1]. La función de Hash que usaremos tendrá dos parámetros un parámetro B y un parámetro L, y para el substring S' de largo k que comienza en la posición i se calculará como:
 		</p>
 		<code>
 			<div class = codediv>
@@ -173,5 +165,44 @@
 		<p>
 			
 		</p>
+		<div class = "page-header">
+			<h2>Problemas</h2>
+		</div>
+		<div class="panel panel-info">
+      		<div class="panel-heading">
+      			<h4>Semana 1</h4>
+      		</div>
+      		<div class="panel-body">
+      			<ul>
+					<li>
+						(obligatorio) Glass Bleads <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=660">uva.onlinejudge.org/ ... _problem&problem=660</a>
+					</li>
+					<li>
+						(opcional) Musical Plagiarism <a href = "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2937">uva.onlinejudge.org/ ... problem&problem=2937</a>
+					</li>
+				</ul>
+      		</div>
+   		</div>
+   		<div class="panel panel-info">
+      		<div class="panel-heading">
+      			<h4>Semana 1</h4>
+      		</div>
+      		<div class="panel-body">
+      			<ul>
+					<li>
+						(obligatorio) Power Strings <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1239">uva.onlinejudge.org/ ... problem&problem=1239</a>
+					</li>
+					<li>
+						(obligatorio) Buzzwords <a href = "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=226&page=show_problem&problem=2955">uva.onlinejudge.org/ ... problem&problem=2955</a>
+					</li>
+					<li>
+						 (opcional) Obsessive String <a href = "http://codeforces.com/problemset/problem/494/B">codeforces.com/problemset/problem/494/B</a>
+					</li>
+					<li>
+						(opcional) Matrix Matcher <a href = "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1960">uva.onlinejudge.org/ ... problem&problem=1960</a>
+					</li>
+				</ul>
+      		</div>
+   		</div>
 	</div>
 </body>
