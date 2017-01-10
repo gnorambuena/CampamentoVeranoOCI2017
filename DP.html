@@ -1,11 +1,18 @@
 <!doctype html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Programación Dinámica</title>
 </head> 
 <body style = "margin-right: 50px; margin-left: 50px">
-	<div class = content>
+	<div class = "container">
+		<div class = "page-header">
+			<h2 class = "text-primary">Programación Dinámica</h2>
+		</div>
 		<h3>Motivación</h3>
 
 		<p>Recursión</p>
@@ -21,10 +28,11 @@
 		La complejidad usando recursión es &Omicron;(exp(n)), que es muy costoso
 		computacionalmente.
 		</p>
-		<p>===================</p>
-		<h3>Programación Dinámica</h3>
+		<div class = "page-header">
+			<h2>Programación Dinámica</h2>
+		</div>
 		<p style="text-align: justify">
-			Paradigma de resolución de problemas, en el que se identifica unaserie de subproblemas, y luego se resuelven desde el más pequeño,usando las soluciones de problemas menores para resolver los más grandes.
+			Es un paradigma de resolución de problemas, en el que se identifica unaserie de subproblemas, y luego se resuelven desde el más pequeño,usando las soluciones de problemas menores para resolver los más grandes.
 		</p>
 
 		<p>
@@ -50,22 +58,32 @@
 		</code>
 		<p>Entonces, podemos usar programación dinámica.</p>
 		<p></p>
-		<h3>Esquemas de Resolución usando programación dinámica.</h3>
-		<ol>
-			<li style = "text-align: justify;">
-				Top-down: resolvemos subproblemas a medida que los vayamos necesitando, si es que no lo hemos calculado previamente. <b>¡Cuidado con desbordar la pila!</b>
-			</li>
-			<li style = "text-align: justify;">
-				 Bottom-up: resolvemos subproblemas “base”, y luego todos lossubproblemas hacia arriba hasta resolver el problema inicial.
-			</li>
-		</ol>
-		<h3>Resolución top-down</h3>
+
+		<div class="panel panel-primary">
+	  		<div class="panel-heading">
+	  			<h4>Esquemas de Resolucion</h4>
+	  		</div>
+	  		<div class="panel-body">
+		  		<ol>
+					<li style = "text-align: justify;">
+						Top-down: resolvemos subproblemas a medida que los vayamos necesitando, si es que no lo hemos calculado previamente. <b>¡Cuidado con desbordar la pila!</b>
+					</li>
+					<li style = "text-align: justify;">
+						 Bottom-up: resolvemos subproblemas “base”, y luego todos lossubproblemas hacia arriba hasta resolver el problema inicial.
+					</li>
+				</ol>
+			</div>
+		</div>
+		
+		<div class = "page-header">
+			<h3>Resolución top-down</h3>
+		</div>
 		<p></p>
 		<p>
 			Cada vez que calculemos f para algún i, lo guardaremos en una tabla. Si necesitamos un valor de f, revisamos esta tabla y lo calculamos sólo si no está.
 		</p>
 		<code>
-			<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+			<div class = codediv>
 				<ol>
 					<li>
 						vector&lt;long&gt; mem(N, 0); //N suficientemente grande
@@ -98,7 +116,9 @@
 				</ol>
 			</div>
 		</code>
-		<h3>Resolución bottom-up</h3>
+		<div class = "page-header">
+			<h3>Resolución bottom-up</h3>
+		</div>
 		<p>Completamos la tabla hasta el valor requerido.</p>
 		<code>
 			<div class = codediv>
@@ -134,8 +154,9 @@
 				</ol>
 			</div>
 		</code>
-		<p>===================</p>
-		<h3>Subproblemas</h3>
+		<div class = "page-header">
+			<h3>Subproblemas</h3>
+		</div>
 		<p> 
 			Al usar programación dinámica, las preguntas que uno debe responder son:
 		</p>
@@ -150,21 +171,27 @@
 		<p>
 			En cuanto a la relación entre subproblemas, estos deben ser deducidos a partir de las reglas del problema particular que sequiere resolver.
 		</p>
-		<p>===================</p>
-		<h3>Ejemplos</h3>
-		<p></p>
-		<h4>Secuencia creciente más larga</h4>
-		<p> 
-			Dado un arreglo de números, determinar el largo de la secuencia (no necesariamente contigua) más larga.
-		</p>
-		<p>Ej.: 25; 85; 36; 87; 61; 6; 96; 21; 47; 58.</p>
-		<p></p>
-		<p>Dos algoritmos:</p>
-		<ul>
-			<li>Subproblemas: LIS hasta posición i (&omicron;(n^2))</li>
-			<li>Subproblemas: posición en la que termina la secuencia creciente de largo n (&omicron;(n*log(k)))</li>
-		</ul>
-		<h3>===== Material Adicional ======</h3>
+		<div class="panel panel-primary">
+	  		<div class="panel-heading">
+	  			<h4>Ejemplo</h4>
+	  		</div>
+	  		<div class="panel-body">
+		  		<p><b>Secuencia creciente más larga</b></p>
+				<p> 
+					Dado un arreglo de números, determinar el largo de la secuencia (no necesariamente contigua) más larga.
+				</p>
+				<p>Ej.: 25; 85; 36; 87; 61; 6; 96; 21; 47; 58.</p>
+				<p></p>
+				<p>Dos algoritmos:</p>
+				<ul>
+					<li>Subproblemas: LIS hasta posición i (O(n^2))</li>
+					<li>Subproblemas: posición en la que termina la secuencia creciente de largo n (O(n*log(k)))</li>
+				</ul>
+			</div>
+		</div>
+		<div class = "page-header">
+			<h2>Material Adicional</h2>
+		</div>
 			<p>
 			Por si necesitan más material, el siguiente es el video completo de DP (dura más de una hora).
 			</p>
