@@ -1,5 +1,14 @@
 p {
 	text-align: justify;
+	font-size: 15px;
+}
+
+li {
+	font-size: 15px;
+}
+
+body {
+	font-size: 15px;
 }
 
 .comment {
