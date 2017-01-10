@@ -1,52 +1,24 @@
 <!doctype html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Segment Tree</title>
 </head> 
 <body style = "margin-right: 50px; margin-left: 50px">
-	<h3>Segment Tree</h3>
+	<div class = "page-header">
+		<h2 class = "text-primary">Segment Tree</h2>
+	</div>
 	<p></p>
 	<p style = "text-align: justify;">
-		El ST es una estructura de datos muy versátil que sirve para responder varias consultas de agregación tipo máximo, mínimo, sumas, promedio, multiplicaciones y otras menos estándar, en tiempo log N para un universo de N elementos. Típicamente el ST se construye para responder consultas sobre un arreglo (como "entrégame el mínimo valor entre los índices i y j del arreglo"). También se pueden hacer actualizaciones de elementos de ese arreglo que tardan tiempo log N. Si tenemos entonces un problema donde hay Q consultas (preguntas por rango y actualizaciones de elementos) sobre un arreglo de largo N, el tiempo total de la solución con ST será &Omicron;(Q log N) más el tiempo de construcción incial del ST (que se puede lograr en &Omicron;(N log N)).
+		El ST es una estructura de datos muy versátil que sirve para responder varias consultas de agregación tipo máximo, mínimo, sumas, promedio, multiplicaciones y otras menos estándar, en tiempo log N para un universo de N elementos. Típicamente el ST se construye para responder consultas sobre un arreglo (como "entrégame el mínimo valor entre los índices i y j del arreglo"). También se pueden hacer actualizaciones de elementos de ese arreglo que tardan tiempo log N. Si tenemos entonces un problema donde hay Q consultas (preguntas por rango y actualizaciones de elementos) sobre un arreglo de largo N, el tiempo total de la solución con ST será &Omicron;(Q log N) más el tiempo de construcción inicial del ST (que se puede lograr en &Omicron;(N log N)).
 	</p>
-
-	<h4>Problemas</h4>
-	<p style = "text-align: justify;">Semana 1</p>
-	<ul>
-		<li> (opcional) Range Minimum Query
-		<a href = "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">judge.u-aizu.ac.jp/ ... ption.jsp?id=DSL_2_A</a>
-		</li>
-		<li>(opcional) Fenwick Trees 
-		<a href = "http://www.spoj.com/problems/FENTREE/">www.spoj.com/problems/FENTREE/</a>
-		</li>
-		<li>
-		(obligatorio) Interval Products
-			<a href = "https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=572&page=show_problem&problem=4150"> icpcarchive.ecs.baylor.edu/ ... problem&problem=4150</a>
-		</li>
-	</ul>
-	<p style = "text-align: justify;">Semana 2</p>
-	<ul>
-		<li>(obligatorio) Maximum Sum
-		<a href = "http://www.spoj.com/problems/KGSS/">www.spoj.com/problems/KGSS/</a></li>
-		<li>(obligatorio) Frequent Values
-			<a href="https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2176">uva.onlinejudge.org/ ... problem&problem=2176</a>
-		</li>
-		<li>(opcional) Jupiter Attacks
-			<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=531&page=show_problem&problem=3809">
-				icpcarchive.ecs.baylor.edu/ ... problem&problem=3809
-			</a>
-		</li>
-		<li>
-			(opcional) Divisors
-			<a href ="http://www.spoj.com/problems/EC_DIVS/">
-				http://www.spoj.com/problems/EC_DIVS/
-			</a>
-		</li>
-	</ul>
-	<p style = "text-align: justify;">
-		Los dos problemas opcionales de la Semana 1 son directos desde los códigos que les estamos entregando (ver abajo), así que les recomendamos que los hagan para que prueben la implementación y vean cómo funciona. Ojo que uno es un problema del tema anterior que también se puede resolver con ST. Los problemas de la Semana 2 no son fáciles para que empiecen a programar cuanto antes. Y ojo que acá ya aparecen problemas de competencias reales de programación competitiva!
-	</p>
+	<div class = "page-header">
+		<h2>Explicación</h2>
+	</div>
 	<p style ="text-align: justify;">
 		Tenemos un par de videos que están bien ordenados para aprender esta estructura. Los dos videos los pueden encontrar acá:
 	</p>
@@ -61,11 +33,16 @@
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/3aAIVFYQT3Q" frameborder="0" allowfullscreen></iframe>
 	<p></p>
 	<p style = "text-align: justify;">En el primero está un poco más pulida la explicación pero es un poco más largo. El segundo es más "familiar" porque eramos poquitos en el DCC. Ustedes decidan pero ambos videos son equivalentes conceptualmente.</p>
-	<p style = "text-align: justify;">
-		Después de que vean los videos van a entender la implementación del ST. Abajo encuentran una implementación "didáctica" para un ST que responde consultas de mínimos por rango en un arreglo (funcion query) y actualizaciones de los valores del arreglo (función update). En el material docente les dejaremos las versiones para hacer consultas de sumas por rango y una versión más general que se puede adaptar para cubrir otras operaciones (vean el video para entender!)
+	<p>
+		Después de que vean los videos van a entender la implementación del ST.
+	</p>
+	<div class ="page-header">
+		<h2>Implementación</h2>
+	</div> 
+	<p>Abajo encuentran una implementación "didáctica" para un ST que responde consultas de mínimos por rango en un arreglo (funcion query) y actualizaciones de los valores del arreglo (función update). 
 	</p>
 	<code>
-		<div style="background-color:#FCFCE0; margin-right: 350px; border: 2px groove grey;">
+		<div class = codediv>
 			<ol>
 				<li>
 				<p class = comment>
@@ -245,4 +222,54 @@
 	<p>
 		Con un poco más de esfuerzo el ST puede soportar consultas por rangos y actualizaciones por rango, pero la programación es bastante más difícil. Para los que se sientan aventureros pueden intentar implementar esta versión que se llama ST con LazyUpdate. 
 	</p>
+
+	<div class = "page-header">
+		<h2>Problemas</h2>
+	</div>
+	<p>
+		Los dos problemas opcionales de la Semana 1 son directos desde los códigos que les estamos entregando, así que les recomendamos que los hagan para que prueben la implementación y vean cómo funciona. Ojo que uno es un problema del tema anterior que también se puede resolver con ST. Los problemas de la Semana 2 no son fáciles para que empiecen a programar cuanto antes. Y ojo que acá ya aparecen problemas de competencias reales de programación competitiva!
+	</p>
+	<div class="panel panel-info">
+      		<div class="panel-heading">
+      			<h3>Semana 1</h3>
+      		</div>
+      		<div class="panel-body">
+      			<ul>
+					<li> (opcional) Range Minimum Query
+					<a href = "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">judge.u-aizu.ac.jp/ ... ption.jsp?id=DSL_2_A</a>
+					</li>
+					<li>(opcional) Fenwick Trees 
+					<a href = "http://www.spoj.com/problems/FENTREE/">www.spoj.com/problems/FENTREE/</a>
+					</li>
+					<li>
+					(obligatorio) Interval Products
+						<a href = "https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=572&page=show_problem&problem=4150"> icpcarchive.ecs.baylor.edu/ ... problem&problem=4150</a>
+					</li>
+				</ul>
+      		</div>
+   		</div>
+		<div class="panel panel-info">
+      		<div class="panel-heading">
+      			<h3>Semana 2</h3>
+      		</div>
+      		<ul>
+				<li>(obligatorio) Maximum Sum
+				<a href = "http://www.spoj.com/problems/KGSS/">www.spoj.com/problems/KGSS/</a></li>
+				<li>(obligatorio) Frequent Values
+					<a href="https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2176">uva.onlinejudge.org/ ... problem&problem=2176</a>
+				</li>
+				<li>(opcional) Jupiter Attacks
+					<a href="https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=531&page=show_problem&problem=3809">
+						icpcarchive.ecs.baylor.edu/ ... problem&problem=3809
+					</a>
+				</li>
+				<li>
+					(opcional) Divisors
+					<a href ="http://www.spoj.com/problems/EC_DIVS/">
+						http://www.spoj.com/problems/EC_DIVS/
+					</a>
+				</li>
+			</ul>
+   		</div>
+	
 </body>
