@@ -1,0 +1,141 @@
+<!doctype html>
+<head>
+		<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Geometría 2D</title>
+</head> 
+<body>
+	<div class = "container">
+		<div class = "page-header">
+			<h2 class = "text-primary">Geometría 2D</h2>
+		</div>
+		<p>
+			Esta semana veremos geometría, principalmente las aplicaciones de producto punto y producto cruz en dos dimensiones (dot product and cross product en inglés).
+		</p>
+		<div class = "page-header">
+			<h3>Producto cruz</h3>
+		</div>
+		<p>
+			El producto cruz en matemáticas es una operación que se realiza entre 2 vectores y cuyo resultado es un 3er vector. En geometría 2D aplicada a programación competitiva la forma en que se usa es la siguiente. Suponga que se cuenta con un punto inicial digamos A=(x1,y1) y dos puntos B=(x2,y2) y C=(x,y). El típico producto cruz que usaremos será el producto entre el vector AB y el vector AC que se obtiene con la siguiente función:
+		</p>
+		<code>
+			<div class = codediv>
+				<ol>
+					<li>(x2-x1)*(y-y1)-(y2-y1)*(x-x1)</li>
+				</ol>		
+			</div>
+		</code>
+
+		<p>
+			Otra forma de ver este producto cruz, y que será muy útil en programacion competitiva, es como si fuera una operación entre un segmento, en esta caso el segmento desde A hasta B, y un punto, en este caso el punto C.
+		</p>
+
+		<p>
+			El valor resultante de esta operación será un número real que tiene las siguientes interpretaciones.
+		</p>
+		<div class="panel panel-primary">
+	  		<div class="panel-heading">
+	  			<h4>Interpretaciones</h4>
+	  		</div>
+	  		<div class="panel-body">
+		  		<ol>
+					<li>	
+						Dependiendo del signo del producto cruz, se puede saber si el punto (C) es colineal al segmento (AB), está en sentido antihorario (a la izquierda) o en sentido horario (a la derecha). Los 3 casos se obtienen de la siguiente forma.
+						<p>a.- producto cruz = 0; // el punto es colineal al segmento.</p>
+						<p>b.- producto cruz > 0; // el punto está a la izquierda (sentido antihorario) del segmento.</p>
+						<p>c.- producto cruz < 0; // el punto está a la derecha (sentido horario) del segmento.</p>
+					</li>
+					<li>
+						 El valor absoluto del resultado del producto cruz entrega el área del paralelogramo formado por los dos segmentos. Es decir, entrega el área del palalogramo que se forma considerando los segmentos AB y AC como dos de sus lados. Aún más, si este valor se divide por 2, entonces se calcula el area del triángulo ABC.
+						 <p>Con un poco de trabajo se puede demostrar que el producto cruz se puede usar también para calcular el area de cualquier polígono expresado como un arreglo de puntos ordenados en algún sentido (horario o antihorario) simplemente haciendo el producto cruz entre los n pares de puntos adyacentes.</p>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class = "page-header">
+			<h3>Producto Punto</h3>
+		</div>
+		<p>
+			Al igual para el producto cruz el producto punto lo pensaremos entre dos vectores AB y AC, o, lo que es más usual en programación competitiva, entre un segmento AB y un punto C. El típico producto punto que usaremos será el que se obtiene por
+		</p>
+		<code>
+			<div class = codediv>
+				<ol>
+					<li>(x2-x1)*(x-x1)+(y2-y1)*(y-y1)</li>
+				</ol>		
+			</div>
+		</code>
+		<p>
+			Los tres usos más comunes del producto punto son:
+		</p>
+		<ol>
+			<li>
+				 Calcular la proyección del punto (C) sobre (la línea que genera) el segmento (AB).
+			</li>
+			<li>
+				Calcular distancias entre lineas y puntos a partir de proyectar el punto sobre el vector perpendicular unitario a la linea.
+			</li>
+			<li>
+				Calcular distancias entre planos y puntos similar al caso anterior pero en donde la línea se considera como un plano en 3D.
+			</li>
+		</ol>
+		<p>
+			Si quieren mirar más explicaciones y otras cosas de geometría más avanzadas, también tenemos un video por el gran Rodrigo Alonso!
+		</p>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/2QZdPXHuQH8" frameborder="0" allowfullscreen></iframe>
+		<div class = "page-header">
+			<h3>Problemas</h3>
+		</div>
+		<div class="panel panel-info">
+	  		<div class="panel-heading">
+	  			<h3>Semana 1</h3>
+	  		</div>
+	  		<div class="panel-body">
+		  		<ul>
+					<li>(obligatorio) Left, right or center? 
+					<a href = "http://www.spoj.com/problems/CROSSPDCT/
+">www.spoj.com/problems/CROSSPDCT/
+</a></li>
+					<li>(opcional) Inside or outside?
+						<a href="http://www.spoj.com/problems/INOROUT/">www.spoj.com/problems/INOROUT/</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="panel panel-info">
+	  		<div class="panel-heading">
+	  			<h3>Semana 2</h3>
+	  		</div>
+	  		<div class="panel-body">
+		  		<ul>
+					<li>
+						(obligatorio) Colby’s Costly Collectibles
+					<a href = "http://www.acmicpc.net/problem/11447">www.acmicpc.net/problem/11447</a></li>
+					<li>
+						(obligatorio) ACIS, A Contagious vIruS
+						<a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=5028">
+							 uva.onlinejudge.org/...problem&problem=5028
+						</a>
+					</li>
+					<li> 
+						(opcional) Balloon uva.onlinejudge.org/ ... problem&problem=4376
+						<a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4376">uuva.onlinejudge.org/ ... problem&problem=4376</a>
+					</li>
+					<li>
+						 (opcional) Horizonte Montañoso
+						<a href ="https://www.urionlinejudge.com.br/judge/es/problems/view/2043">
+							www.urionlinejudge.com.br/ ... s/problems/view/2043
+						</a>
+					</li>
+					<li>
+						 (opcional) Brocard Point of a Triangle <a href = "https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=5388">icpcarchive.ecs.baylor.edu/ ... problem&problem=5388</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
