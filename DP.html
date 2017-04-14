@@ -8,7 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Programación Dinámica</title>
 </head> 
-<body style = "margin-right: 50px; margin-left: 50px">
+<body>
 	<div class = "container">
 		<div class = "page-header">
 			<h2 class = "text-primary">Programación Dinámica</h2>
@@ -46,7 +46,7 @@
 				Superposición de subproblemas (opcional).
 			</li>
 		</ol>
-		<code>
+		<div class = "code">
 			<ol>
 			<li>f(0) = 0</li>
 			<li>f(1) = 1</li>
@@ -55,7 +55,7 @@
 			<li>f(n-1) = f(n-2) + f(n-3) // Segunda condición</li>
 			<li>...</li>
 			</ol>
-		</code>
+		</div>
 		<p>Entonces, podemos usar programación dinámica.</p>
 		<p></p>
 
@@ -82,40 +82,38 @@
 		<p>
 			Cada vez que calculemos f para algún i, lo guardaremos en una tabla. Si necesitamos un valor de f, revisamos esta tabla y lo calculamos sólo si no está.
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						vector&lt;long&gt; mem(N, 0); //N suficientemente grande
-					</li>
-					<p></p>
-					<li>
-						long fibo(int n) {
-					</li>
-					<li>
-						if (n<=1) 
-					</li>
-					<li style = "padding-left:2em">
-						return n;
-					</li>
-					<li>
-						if (mem[n] != 0 )
-					</li>
-					<li style = "padding-left:2em">
-						return mem[n];
-					</li>
-					<li>
-						else
-					</li>
-					<li style = "padding-left:2em">
-						return mem[n] = fibo(n-1) + fibo(n-2);
-					</li>
-					<li>
-						}
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					vector&lt;long&gt; mem(N, 0); //N suficientemente grande
+				</li>
+				<p></p>
+				<li>
+					long fibo(int n) {
+				</li>
+				<li>
+					if (n<=1) 
+				</li>
+				<li style = "padding-left:2em">
+					return n;
+				</li>
+				<li>
+					if (mem[n] != 0 )
+				</li>
+				<li style = "padding-left:2em">
+					return mem[n];
+				</li>
+				<li>
+					else
+				</li>
+				<li style = "padding-left:2em">
+					return mem[n] = fibo(n-1) + fibo(n-2);
+				</li>
+				<li>
+					}
+				</li>
+			</ol>
+		</div>
 		<div class = "page-header">
 			<h3>Resolución bottom-up</h3>
 		</div>

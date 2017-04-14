@@ -8,7 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Backtracking</title>
 </head> 
-<body style = "margin-left: 50px; margin-right: 50px">
+<body>
 	<div class = "container">
 		<div class ="page-header">
 			<h2 class = "text-primary">Backtracking</h2>
@@ -40,28 +40,28 @@
       		</div>
       		<div class="panel-body">
       			<ul>
-					<li style="text-align: justify">
+					<li>
 					El espacio de búsqueda siempre se puede pensar que son objetos del tipo "todas las permutaciones de ciertos números", "todas las posibles formas de jugar una partida de ajedrez", "todos los posibles caminos en un laberinto (que no pasan dos veces por el mismo lugar)", etc. y dependerá del problema en particular. </li>
 
-					<li style="text-align: justify">
+					<li>
 					En general los objetos se pueden ir creando de a poco desde objetos más pequeños. Por ejemplo, para crear una posible permutación, se puede empezar de una lista vacía e ir agregando elementos distintos uno a uno hasta construir la permutación completa. Lo mismo para la partida de ajedrez (voy moviendo las piezas una a una según las reglas del ajedrez) o los caminos en un laberinto (comienzo en la entrada del laberinto y voy avanzando paso a paso).
 					</li>
 
-					<li style="text-align: justify">
+					<li>
 					La construcción de todos los posibles objetos del espacio de búsqueda se puede estructurar (implícitamente) en un árbol en donde cada nodo es un "objeto parcial". A este árbol se le llama el "arbol de backtracing". 
 					</li>
 
-					<li style="text-align: justify">
+					<li>
 					La raiz del árbol es el objeto más pequeño o inicial, p.ej. la lista vacía en el caso de las permutaciones, o el tablero inicial en el caso del ajedrez. Dado un nodo del árbol, sus hijos representarán todas las posibles formas de crear un objeto parcial siguiente a partir del objeto parcial actual. Por ejemplo, en el caso del tablero de ajedrez los hijos de un nodo (tablero) serían todos los posibles tableros que se obtienen moviendo una pieza desde la posición del tablero actual. Como un ejemplo más concreto, supongamos que el espacio de búsqueda son las permutaciones de 8 letras {a,b,c,d,e,f,g,h}.
 					<p> Un nodo del arbol es "hcfa" en cuyo caso sus hijos serían "hcfab", "hcfad", "hcfae", y "hcfag". Por su parte los hijos de "hcfag" serían "hcfagb", "hcfagd", y "hcfage", y así sucesivamente.</p>
 					</li>
 				</ul>
 
 				<ul>
-					<li style="text-align: justify">
+					<li>
 					Siguiendo la idea general, cada hoja del árbol representa a un objeto del espacio de búsqueda, es decir un objeto que ya no se puede extender. Por ejemplo, en el caso de las partida de ajedrez, una hoja representará un tablero en posición de jaque-mate. En el caso de las permutaciones, una hoja representa una posible permutación de todos los elementos. Y en el caso del laberinto, una hoja representa a un camino que llegó hasta un punto en donde no hay opción de continuar.
 					</li>
-					<li style="text-align: justify">
+					<li>
 					Una clave importante está en cómo representar a los objetos (parciales y las hojas) de manera ordenada y que consideren todo lo necesario para el problema (y no más que lo necesario). Hay casos simples, como las permutaciones, y casos más complicados (como el laberinto) y aprender a hacerlo bien requiere práctica.
 					</li>
 				</ul>
@@ -73,19 +73,19 @@
       		</div>
       		<div class="panel-body">
       			<ul>
-					<li style="text-align: justify">
+					<li>
 					 Para poder recorrer el espacio de búsqueda completo, se comienza en la raíz del árbol de backtracking. Este es un recorrido "implícito", el árbol no se construye como tal, y el código del Backtracking será el encargado de este recorrido.
 					</li>
-					<li style="text-align: justify">
+					<li>
 					Lo más natural es hacer un recorrido recursivamente.
 					</li>
-					<li style="text-align: justify">
+					<li>
 					Conceptualmente se comienza en la raiz del árbol, la que representa al objeto inicial.
 					</li>
-					<li style="text-align: justify">
+					<li>
 					Cuando me encuentro en un nodo cualquiera, si este no es una hoja, sigo recorriedo por cada uno de sus hijos (en algún orden). Lo que realmente hace el backtraking es construir un objeto parcial desde el que representa el nodo actual en el que me encuentro, y seguir recorriendo por ese objeto.
 					</li>
-					<li style="text-align: justify">
+					<li>
 					Al llegar a una hoja del árbol estoy en un punto del espacio de búsqueda y puedo probrar entonces si satisface la propiedad que busco o tomar cualquier decisión que se necesite según el problema. Por ejemplo, si simplemente estoy buscando un objeto que cumpla cierta propiedad, entonces chequeo esa propiedad sobre el objeto y tomo una decisión dependiendo de si la cumple o no. Por ejemplo, suponga que quiero imprimir en pantalla todas las permutaciones de 8 letras {a,b,c,d,e,f,g,h} tales que la letra "e" aparece dos posiciones antes que la letra "a". Si llego a la hoja (permutación) "hefagdbc" entonces la imprimo, pero si llego a la hoja "fabcdegh" no la imprimo.
 					</li>
 					<li style="text-align: justify">
@@ -100,62 +100,59 @@
 		<p>
 		Un esquema de procedimiento recursivo general de backtracking sería el siguiente:	
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>BackTracking(objeto_parcial P)</li>
-					<li style = "padding-left: 2em;"><p class = keyword>if</p> P es un objeto del espacio de búsqueda <p class = comment>// llegué a una hoja</p></li>
-					<li style = "padding-left: 4em;">tomo una decisión                     <p class = comment>// cuento, sumo, imprimo, etc</p></li>
-					<li style = "padding-left: 2em;"> <p class = keyword>else</p></li>
-					<li style = "padding-left: 4em;"> para todas las formas de construir un nuevo objeto desde P</li>
-					<li style = "padding-left: 4em;">construyo el objeto P' desde P</li>
-					<li style = "padding-left: 4em;">llamo a BackTracking(P')</li>
-					<li style = "padding-left: 2em;">
-					<p class = keyword>return</p>                                    <p class = comment>// terminé de chequear todas las opciones desde P</p></li>
-				</ol>
-			</div>
-		</code>
-		<p style="text-align: justify">El llamado inicial para comenzar con el Backtracking se hace con el objeto inicial (lista vacía, tablero de ajedrez inicial, etc.)</p>
+		<div class = "code">
+			<ol>
+				<li>BackTracking(objeto_parcial P)</li>
+				<li style = "padding-left: 2em;"><p class = keyword>if</p> P es un objeto del espacio de búsqueda <p class = comment>// llegué a una hoja</p></li>
+				<li style = "padding-left: 4em;">tomo una decisión                     <p class = comment>// cuento, sumo, imprimo, etc</p></li>
+				<li style = "padding-left: 2em;"> <p class = keyword>else</p></li>
+				<li style = "padding-left: 4em;"> para todas las formas de construir un nuevo objeto desde P</li>
+				<li style = "padding-left: 4em;">construyo el objeto P' desde P</li>
+				<li style = "padding-left: 4em;">llamo a BackTracking(P')</li>
+				<li style = "padding-left: 2em;">
+				<p class = keyword>return</p>                                    <p class = comment>// terminé de chequear todas las opciones desde P</p></li>
+			</ol>
+		</div>
+		<p>El llamado inicial para comenzar con el Backtracking se hace con el objeto inicial (lista vacía, tablero de ajedrez inicial, etc.)</p>
 		<p></p>
-		<p style="text-align: justify">
+		<p>
 			Como un ejemplo más concreto, si tengo que imprimir todas las permutaciones de {a,b,c,d,e,f,g,h} que cumplen cierta propiedad, el procedimiento se vería así:
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>BackTracking(objeto_parcial P)</li>
-					<li style = "padding-left: 2em">
-						<p class = keyword>
-						if
-						</p> 
-						P tiene largo 8 
-						<p class = comment>
-							// es un objeto del espacio de búsqueda</p>
-						</li>
-					<li style = "padding-left: 4em">
-						<p class = keyword>
-							if 
-						</p>
-						P cumple la propiedad</li>
-					<li style = "padding-left: 6em">
-						imprimir P
+		
+		<div class = "code">
+			<ol>
+				<li>BackTracking(objeto_parcial P)</li>
+				<li style = "padding-left: 2em">
+					<p class = keyword>
+					if
+					</p> 
+					P tiene largo 8 
+					<p class = comment>
+						// es un objeto del espacio de búsqueda</p>
 					</li>
-					<li style = "padding-left: 4em">
-						<p class = keyword>	
-							else
-						</p>
-					</li>
-					<li style ="padding-left: 6em"> para cada elemento K en {a,b,c,d,e,f,g,h} no mencionado en P</li>
-					<li style ="padding-left: 6em">construyo la permutación P' como P seguido de K</li>
-					<li style ="padding-left: 6em">llamo a BackTracking(P')</li>
-					<li style ="padding-left: 2em">
-						<p class = keyword>
-							return
-						</p>
-					</li>
-				</ol>
-			</div>
-		</code>
+				<li style = "padding-left: 4em">
+					<p class = keyword>
+						if 
+					</p>
+					P cumple la propiedad</li>
+				<li style = "padding-left: 6em">
+					imprimir P
+				</li>
+				<li style = "padding-left: 4em">
+					<p class = keyword>	
+						else
+					</p>
+				</li>
+				<li style ="padding-left: 6em"> para cada elemento K en {a,b,c,d,e,f,g,h} no mencionado en P</li>
+				<li style ="padding-left: 6em">construyo la permutación P' como P seguido de K</li>
+				<li style ="padding-left: 6em">llamo a BackTracking(P')</li>
+				<li style ="padding-left: 2em">
+					<p class = keyword>
+						return
+					</p>
+				</li>
+			</ol>
+		</div>
 		<div class ="page-header">
 			<h2>Problemas</h2>
 		</div>
@@ -199,6 +196,18 @@
 				</ul>
       		</div>
    		</div>
-
+	</div>
+	<div class = "footer">
+		<ul class="pagination">
+			<li><a href ="binarysearch.html"><span class = "glyphicon glyphicon-menu-left"></span></a></li>
+	 		<li><a href="first.html">1</a></li>
+	 		<li><a href="binarysearch.html">2</a></li>
+	   		<li class = "active"><a href="#">3</a></li>
+	    	<li><a href="fenwicktree.html">4</a></li>
+	    	<li><a href="segmenttree.html">5</a></li>
+	    	<li><a href="rollinghashing.html">6</a></li>  
+	    	<li><a href="geometry.html">7</a></li>
+	    	<li><a href ="fenwicktree.html"><span class = "glyphicon glyphicon-menu-right"></span></a></li>
+		</ul>
 	</div>
 </body>

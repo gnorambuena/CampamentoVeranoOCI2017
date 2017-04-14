@@ -8,8 +8,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Rolling Hashing</title>
 </head> 
-<body style = "margin-right: 50px; margin-left: 50px">
-	<div class = content>
+<body>
+	<div class = "container">
 		<div class = "page-header">
 			<h2 class = "text-primary">Rolling Hashing</h2>
 		</div>
@@ -83,82 +83,72 @@
 		<p>
 			Suponga que tenemos un string S de largo N, luego el string está definido por los valores en cada una de sus posiciones S[0],S[1],...,S[N-1]. La función de Hash que usaremos tendrá dos parámetros un parámetro B y un parámetro L, y para el substring S' de largo k que comienza en la posición i se calculará como:
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						H(S')  =  ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) )  MOD L
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					H(S')  =  ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) )  MOD L
+				</li>
+			</ol>
+		</div>
 		<p>
 			Note que con esta definición el tiempo que tardaría calcular H(S') es lineal en el largo de S' lo que no nos ahorra nada. Para mejorar esto usaremos el siguiente truco. Precomputaremos recursivamente los siguientes valores:
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						G[N-1] = S[N-1]
-					</li>
-					<li>
-						G[j] = ( S[j] + G[j+1]*B ) MOD L
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					G[N-1] = S[N-1]
+				</li>
+				<li>
+					G[j] = ( S[j] + G[j+1]*B ) MOD L
+				</li>
+			</ol>
+		</div>
 		<p>
 			Note que esta computación se puede hacer en tiempo lineal O(N). Note también que para todo j se tiene que
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						G[j] = ( S[j] + S[j+1]*B + S[j+2]*B^2 + .... + S[N-1]*B^(N-j) ) MOD L
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					G[j] = ( S[j] + S[j+1]*B + S[j+2]*B^2 + .... + S[N-1]*B^(N-j) ) MOD L
+				</li>
+			</ol>
+		</div>
 		<p>
 			Suponga ahora que quisiéramos calcular H(S') para S' el substring S[i..i+(k-1)] (el substring que comienza en la posición i y tiene largo k). Este valor se puede calcular simplemente como:
 		</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						H(S') = ( G[i] - G[i+k]*B^k ) MOD L
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					H(S') = ( G[i] - G[i+k]*B^k ) MOD L
+				</li>
+			</ol>
+		</div>
 		<p>
 			o sea, usando solo una cantidad constante de operaciones. La razón por la que se puede calcular así, es muy simple y está dada por la forma en que se puede escribir H(S'):
 		</p>
-			<code>
-			<div class = codediv>
-				<ol>
-					<li>
-						H(S') = ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) ) MOD L
-					</li>
-					<li style = "padding-left: 2em">
-						= ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[N-1]*B^(N-i) )  -
-					</li>
-					<li style = "padding-left: 3em">
-						( S[i+k]*B^k + S[i+(k+1)]*B^(k+1) + ... + S[N-1]*B^(N-i) )   MOD L
-					</li>
-					<li style = "padding-left: 3em"></li>
-					<li style = "padding-left: 2em">
-						= ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[N-1]*B^(N-i) )  -
-					</li>
-					<li style = "padding-left: 3em">
-						( S[i+k] + S[i+(k+1)]*B + ... + S[N-1]*B^(N-(i+k)) )*B^k   MOD L
-					</li>
-					<li style = "padding-left: 2em">
-						= ( G[i] - G[i+k]*B^k ) MOD L
-					</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li>
+					H(S') = ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[i+(k-1)]*B^(k-1) ) MOD L
+				</li>
+				<li style = "padding-left: 2em">
+					= ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[N-1]*B^(N-i) )  -
+				</li>
+				<li style = "padding-left: 3em">
+					( S[i+k]*B^k + S[i+(k+1)]*B^(k+1) + ... + S[N-1]*B^(N-i) )   MOD L
+				</li>
+				<li style = "padding-left: 3em"></li>
+				<li style = "padding-left: 2em">
+					= ( S[i] + S[i+1]*B + S[i+2]*B^2 + .... + S[N-1]*B^(N-i) )  -
+				</li>
+				<li style = "padding-left: 3em">
+					( S[i+k] + S[i+(k+1)]*B + ... + S[N-1]*B^(N-(i+k)) )*B^k   MOD L
+				</li>
+				<li style = "padding-left: 2em">
+					= ( G[i] - G[i+k]*B^k ) MOD L
+				</li>
+			</ol>
+		</div>
 		<p>
 			Los valores de B y L deben elegirse de manera muy cuidadosa. Buenos valores para B pueden ser 127 o 33. Para L se puede usar 10^9+7 o 10^9+9 o simplemente despreocuparse del módulo y dejar que el cálculo haga overflow en un tipo de dato (unsigned) long long (lo que significa usar L como 2^64). Sin embargo dado que es una técnica probabilística siempre hay posibilidad de "colisiones" en la función de hash (esto quiere decir que strings distintos den el mismo valor del hash). Dejaremos para la discusión que programadores más experimentados nos cuenten qué han hecho en los casos de colisiones.
 		</p>
@@ -204,5 +194,18 @@
 				</ul>
       		</div>
    		</div>
+	</div>
+	<div class = "footer">
+		<ul class="pagination">
+			<li><a href ="segmenttree.html"><span class = "glyphicon glyphicon-menu-left"></span></a></li>
+	 		<li><a href="first.html">1</a></li>
+	 		<li><a href="binarysearch.html">2</a></li>
+	   		<li><a href="backtracking.html">3</a></li>
+	   		<li><a href="fenwicktree.html">4</a></li>
+	    	<li><a href="segmenttree.html">5</a></li>
+	    	<li class = "active"><a href="#">6</a></li>  
+	    	<li><a href="geometry.html">7</a></li>
+	    	<li><a href ="geometry.html"><span class = "glyphicon glyphicon-menu-right"></span></a></li>
+		</ul>
 	</div>
 </body>

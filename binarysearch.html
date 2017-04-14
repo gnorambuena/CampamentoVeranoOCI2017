@@ -8,7 +8,7 @@
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Búsqueda Binaria</title>
 </head> 
-<body style = "margin-left: 80px;margin-right: 80px">
+<body>
 	<div class = "container">
 		<div class ="page-header">
 			<h2 class = "text-primary">Búsqueda Binaria</h2>
@@ -20,23 +20,21 @@
 		<p>// B: fin del espacio de búsqueda</p>
 		<p>// Requiere que la propiedad sea "monótona": es falsa hasta cierto punto, desde donde es siempre verdadera.</p>
 		<p>// Busca el primer valor entre A y B que hace la propiedad</p>
-		<code>
-			<div class = codediv>
-				<ol>
-					<li><p class = keyword>while</p> (A < B){</li>
-					<li style = "padding-left:2em">mid = A + (B - A)/2;</li>
-					<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es cierta en mid */) {</li>
-					<li style = "padding-left:4em">		B = mid;</li>
-					<li style = "padding-left:2em">	<p class = keyword>else</p></li>
-					<li style = "padding-left:4em">		A = mid + 1; </li>
-					<li style = "padding-left:2em">	}</li>
-					<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es falsa en A */)</li>
-					<li style = "padding-left:4em">		/* quejarse! la propiedad es falsa para todos los valores entre A y B */</li>
-					<li style = "padding-left:2em">	<p class = keyword>else</p></li>
-					<li style = "padding-left:4em">		/* A (que es igual a B) es el menor valor del espacio de búsqueda donde la propiedad es cierta */</li>
-				</ol>
-			</div>
-		</code>
+		<div class = "code">
+			<ol>
+				<li><p class = keyword>while</p> (A < B){</li>
+				<li style = "padding-left:2em">mid = A + (B - A)/2;</li>
+				<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es cierta en mid */) {</li>
+				<li style = "padding-left:4em">		B = mid;</li>
+				<li style = "padding-left:2em">	<p class = keyword>else</p></li>
+				<li style = "padding-left:4em">		A = mid + 1; </li>
+				<li style = "padding-left:2em">	}</li>
+				<li style = "padding-left:2em">	<p class = keyword>if</p>( /* propiedad es falsa en A */)</li>
+				<li style = "padding-left:4em">		/* quejarse! la propiedad es falsa para todos los valores entre A y B */</li>
+				<li style = "padding-left:2em">	<p class = keyword>else</p></li>
+				<li style = "padding-left:4em">		/* A (que es igual a B) es el menor valor del espacio de búsqueda donde la propiedad es cierta */</li>
+			</ol>
+		</div>
 		<p></p>
 		<div class = "page-header">
 			<h2>Problemas</h2>
@@ -90,5 +88,18 @@
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/IgjP5zcwR1E" frameborder="0" allowfullscreen></iframe>
 		<p></p>
 		<p>Un tutorial(en inglés) muy bueno y completo lo pueden encontrar <a href="https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/"> acá</a></p>
+	</div>
+	<div class = "footer">
+		<ul class="pagination">
+			<li><a href ="first.html"><span class = "glyphicon glyphicon-menu-left"></span></a></li>
+	 		<li><a href="first.html">1</a></li>
+	 		<li class = "active"><a href="#">2</a></li>
+	   		<li><a href="backtracking.html">3</a></li>
+	    	<li><a href="fenwicktree.html">4</a></li>
+	    	<li><a href="segmenttree.html">5</a></li>
+	    	<li><a href="rollinghashing.html">6</a></li>  
+	    	<li><a href="geometry.html">7</a></li>
+	    	<li><a href ="backtracking.html"><span class = "glyphicon glyphicon-menu-right"></span></a></li>
+		</ul>
 	</div>
 </body>
